@@ -1,4 +1,60 @@
+#补充
+Usage：
+1、安装Mysql，安装mysql数据库服务端(本人使用的是5.8),并设置为utf-8编码，创建相应EasyTest数据库，设置好相应用户名、密码，启动mysql
+2、change EasyTest seething file
+进入EasyTest-master\EasyTest\settings.py修改DATABASES为你当前mysql参数
+		DATABASES = {
+		    'default': {
+		        'ENGINE': 'django.db.backends.mysql',
+		        'HOST': "127.0.0.1",
+		        'NAME': "EasyTest",
+		        'USER': "...",
+		        'PASSWORD': "superuser",
+		        'PORT': "3000",
+		    }
+		}
+3、command
+# 生成数据库迁移脚本,并生成表结构
+	python36 manage.py  makemigrations base
+	python36 manage.py  migrate
+
+'''
+System check identified some issues:
+WARNINGS:
+?: (mysql.W002) MySQL Strict Mode is not set for database connection 'default'
+        HINT: MySQL's Strict Mode fixes many data integrity problems in MySQL, such as data truncation upon insertion,
+ by escalating warnings into errors. It is strongly recommended you activate it. See: https://docs.djangoproject.com/e
+n/2.0/ref/databases/#mysql-sql-mode
+Operations to perform:
+  Apply all migrations: admin, auth, base, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+'''''
+
+# 创建超级用户，用户后台管理数据库，并按提示输入相应用户名，密码，邮箱。 如不需用，可跳过此步骤
+	python36 manage.py  createsuperuser  # 创建超级管理员（可忽略）
+
+# 启动服务
+	python36 manage.py  runserver 127.0.0.1:8000 # 启动EasyTest服务
+
+# 访问
+	http://127.0.0.1:8000/index/
+
+
 # EasyTest
+
+
 
 #2019-7-22
 线上体验地址：http://47.96.182.173:8000
